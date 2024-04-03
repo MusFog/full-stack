@@ -1,0 +1,28 @@
+<div class="section" id="section2">
+  <div class="section-heading">
+    <h2>Новини</h2>
+  </div>
+  <div *ngIf="!loading; else loader">
+    <div *ngIf="news.length !== 0; else empty">
+      <div class="collection">
+        <a *ngFor="let newsItem of news" [routerLink]="['/newsItem', newsItem._id]" class="collection-item">
+          <ul>
+            <li>{{ newsItem.name }}</li>
+            <li>{{ newsItem.description }}</li>
+          </ul>
+        </a>
+      </div>
+      <div *ngIf="!allDataLoaded" class="center mb2">
+        <button class="btn waves-effect grey darken-1 btn-small" (click)="loadMore()">
+          Завантажити ще
+        </button>
+      </div>
+    </div>
+    <ng-template #empty>
+      <div class="center">Новини не знайдено</div>
+    </ng-template>
+  </div>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

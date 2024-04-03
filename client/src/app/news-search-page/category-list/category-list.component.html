@@ -1,0 +1,22 @@
+<div class="section" id="section1">
+  <div *ngIf="categories$ | async as categories; else loader">
+    <div *ngIf="categories.length; else empty" class="categories-section">
+      <div *ngFor="let category of categories"
+           [class.selected]="isSelected(category._id!)"
+           class="category-block"
+           (click)="onCategorySelect(category._id!)">
+        <img *ngIf="category.imageSrc" [src]="category.imageSrc" alt="{{ category.name }}" style="max-width: 100%">
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.description }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #empty>
+    <div class="center">
+      Категорії не знайдено
+    </div>
+  </ng-template>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

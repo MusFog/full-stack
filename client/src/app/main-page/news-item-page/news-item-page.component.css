@@ -1,0 +1,50 @@
+.section {
+  margin-left: 320px;
+}
+.news-item {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+
+}
+
+.news-title {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.news-date {
+  font-size: 1rem;
+}
+
+.news-description {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.article-title {
+  font-size: 1.8rem;
+  color: #444;
+}
+
+.article-content {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.figure {
+  margin: 1rem 0;
+}
+
+.figure-img {
+  max-height: 400px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.figure-caption {
+  font-size: 0.9rem;
+  color: #888;
+}
+

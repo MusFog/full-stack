@@ -1,0 +1,4 @@
+
+†typescript:S1874:"¼'(next?: ((value: Category | null) => void) | null | undefined, error?: ((error: any) => void) | null | undefined, complete?: (() => void) | null | undefined): Subscription' is deprecated.(üÿı•8ÃåÄ—ê1J$06b76f4c-5a81-4bf9-a381-0def17cfb40d
+ştypescript:S1874Q"´'(next?: ((value: Message) => void) | null | undefined, error?: ((error: any) => void) | null | undefined, complete?: (() => void) | null | undefined): Subscription' is deprecated.(²Ùê‡8ÃåÄ—ê1J$93099fa6-b5df-4162-84e1-df6dc5782c5a
+¡typescript:S1874j"×The signature '(next?: ((value: Category) => void) | null | undefined, error?: ((error: any) => void) | null | undefined, complete?: (() => void) | null | undefined): Subscription' of 'obs$.subscribe' is deprecated.(ÎğŸğ8ÃåÄ—ê1J$4babf012-4743-4a7c-aa0a-298919acc33a

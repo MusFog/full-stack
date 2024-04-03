@@ -1,0 +1,44 @@
+<section class="section container mt-5">
+  <ng-container *ngIf="!loading; else loader">
+    <article *ngIf="newsItem" class="news-item">
+      <header class="mb-4">
+        <h1 class="news-title">{{ newsItem.name }}</h1>
+        <time class="news-date text-muted">{{ newsItem.date | date:'longDate' }}</time>
+        <p class="news-description mb-4">Автор {{newsItem.user?.login}}</p>
+      </header>
+      <section class="news-description mb-4">
+        <p>{{ newsItem.description }}</p>
+      </section>
+      <section class="news-articles">
+        <div *ngFor="let article of newsItem.articles; let i = index" class="mb-5">
+          <h2 class="article-title">{{ i + 1 }}. {{ article.title }}</h2>
+          <p class="article-content">{{ article.news }}</p>
+        </div>
+      </section>
+    </article>
+  </ng-container>
+  <ng-container *ngIf="newsItem">
+    <section *ngIf="newsItem.comment?.length" class="comments-section">
+      <h3>Коментарі:</h3>
+      <div *ngFor="let comments of newsItem.comment" class="comment mb-2">
+        <strong>{{ comments.user.login }}:</strong>
+        <p>{{ comments.text }}</p>
+        <time class="text-muted">{{ comments.createdAt | date:'medium' }}</time>
+      </div>
+    </section>
+  </ng-container>
+  <div class="comment-form-container">
+    <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
+      <div class="form-group">
+        <label for="text">Коментар:</label>
+        <textarea id="text" formControlName="text" rows="3" required></textarea>
+      </div>
+      <button type="submit" [disabled]="commentForm.invalid">Відправити коментар</button>
+    </form>
+  </div>
+</section>
+<ng-template #loader>
+  <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

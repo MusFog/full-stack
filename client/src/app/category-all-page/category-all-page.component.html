@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="page-title">
+    <h4>Виберіть категорію</h4>
+    <app-category-all-list (categorySelected)="onCategoriesSelected($event)">
+
+    </app-category-all-list>
+  </div>
+
+
+</section>
+<section class="section" id="section2">
+  <div class="section-heading">
+    <h2>Новини</h2>
+  </div>
+  <div
+    class="row"
+    *ngIf="news$ | async as newsItem; else loader"
+  >
+    <div class="col s12">
+      <div class="collection" *ngIf="newsItem.length !== 0; else empty">
+        <a
+          *ngFor="let news of newsItem"
+          [routerLink]="['/newsItem', news._id]"
+          class="collection-item"
+        >
+          <ul>
+            <li>{{news.name}}</li>
+            <li>{{news.description}}</li>
+          </ul>
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">
+          Новини не знайдено
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+
+</section>

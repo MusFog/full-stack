@@ -1,0 +1,28 @@
+<div class="section" id="section1">
+  <div *ngIf="loading; else loadedContent">
+    <app-loader></app-loader>
+  </div>
+  <ng-template #loadedContent>
+    <div *ngIf="categories.length; else empty" class="categories-section">
+      <div *ngFor="let category of categories"
+           [class.selected]="isSelected(category._id!)"
+           class="category-block"
+           (click)="onCategorySelect(category._id!)">
+        <img *ngIf="category.imageSrc" [src]="category.imageSrc" alt="{{ category.name }}" style="max-width: 100%">
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.description }}</p>
+        <button (click)="subscribeToCategory(category._id!); $event.stopPropagation()">Підписатися на категорію</button>
+      </div>
+    </div>
+    <div *ngIf="!allDataLoaded" class="center mb2">
+      <button class="btn waves-effect grey darken-1 btn-small" (click)="loadMore()">
+        Завантажити ще
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #empty>
+    <div class="center">
+      Категорії не знайдено
+    </div>
+  </ng-template>
+</div>

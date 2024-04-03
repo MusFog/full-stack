@@ -1,0 +1,104 @@
+<div class="section" id="section1">
+  <div class="section-heading">
+    <h2>Категорії</h2>
+    <button class="btn-add" routerLink="/category/new">Додати</button>
+  </div>
+  <div
+    class="row"
+    *ngIf="categories$ | async as categories; else loader"
+  >
+    <div class="col s12">
+      <div class="collection" *ngIf="categories.length !== 0; else empty">
+        <a
+          *ngFor="let category of categories"
+          [routerLink]="['/category', category._id]"
+          class="collection-item"
+        >
+          <ul>
+            <li>{{category.name}}</li>
+            <li>{{category.description}}</li>
+          </ul>
+
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">
+          Категорії не знайдено
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+
+</div>
+
+<div class="section" id="section2">
+  <div class="section-heading">
+    <h2>Новини</h2>
+    <button class="btn-add" routerLink="/news/new">Додати</button>
+  </div>
+  <div
+    class="row"
+    *ngIf="news$ | async as newsItem; else loader"
+  >
+    <div class="col s12">
+      <div class="collection" *ngIf="newsItem.length !== 0; else empty">
+        <a
+          *ngFor="let news of newsItem"
+          [routerLink]="['/newsItem', news._id]"
+          class="collection-item"
+        >
+          <ul>
+            <li>{{news.name}}</li>
+            <li>{{news.description}}</li>
+          </ul>
+
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">
+          Новини не знайдено
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+
+</div>
+<div class="container">
+  <div class="feedback-list-container">
+    <div class="feedback-list">
+      <ul>
+        <li *ngFor="let feedback of feedbacks" (click)="selectFeedback(feedback)">
+          <strong>{{ feedback.user?.login }}:</strong> {{ feedback.title }}
+        </li>
+      </ul>
+    </div>
+    <div class="feedback-details" *ngIf="selectedFeedback">
+      <h2>{{ selectedFeedback.title }}</h2>
+      <p>{{ selectedFeedback.description }}</p>
+      <span>{{ selectedFeedback.createdAt | date:'medium' }}</span>
+      <div class="admin-responses">
+        <div *ngFor="let response of selectedFeedback.adminResponses">
+          <p>{{ response.response }}</p>
+          <span>{{ response.respondedAt | date:'medium' }}</span>
+        </div>
+      </div>
+      <div class="admin-response-form" *ngIf="isAdmin">
+        <form [formGroup]="adminResponseForm" (ngSubmit)="submitResponse(selectedFeedback._id)">
+          <textarea formControlName="response" placeholder="Ваша відповідь" rows="4"></textarea>
+          <button type="submit" [disabled]="adminResponseForm.invalid">Відправити відповідь</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

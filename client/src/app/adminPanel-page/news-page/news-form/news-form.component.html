@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col s12">
+    <div class="page-subtitle">
+      <h4>Новини:</h4>
+      <button class="waves-effect waves-light btn grey darken-1 btn-small" data-target="create-modal" (click)="onAddNews()">
+        Додати новину
+      </button>
+    </div>
+    <div *ngIf="!loading; else loader">
+      <div class="collection" *ngIf="news.length !== 0; else empty">
+        <a *ngFor="let newsItem of news" class="collection-item collection-item-icon" (click)="onSelectNews(newsItem)">
+          <span>
+            {{newsItem.name}} <strong>{{newsItem.description}}</strong>
+          </span>
+          <span>
+            <i class="material-icons" (click)="onDeleteNews($event, newsItem)">delete</i>
+          </span>
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">Немає новин</div>
+      </ng-template>
+    </div>
+    <ng-template #loader>
+      <app-loader></app-loader>
+    </ng-template>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div #modal class="modal">
+      <div class="modal-content">
+        <h4 class="mb1">Додати новину</h4>
+        <div class="input-field">
+          <input formControlName="name" id="news-name" type="text" [ngClass]="{'invalid': form.get('name')?.invalid && form.get('name')?.touched}">
+          <label for="news-name">Назва</label>
+          <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="helper-text red-text">
+            Поле назва не має бути пустим
+          </span>
+        </div>
+        <div class="input-field">
+          <textarea id="news-description" formControlName="description" class="materialize-textarea" [ngClass]="{'invalid': form.get('description')?.invalid && form.get('description')?.touched}"></textarea>
+          <label for="news-description">Опис</label>
+          <span *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="helper-text red-text">
+            Поле опису не має бути пустим
+          </span>
+        </div>
+        <div formArrayName="articles">
+          <div *ngFor="let article of articles.controls; let i = index" [formGroupName]="i">
+            <div class="input-field">
+              <input formControlName="title" id="title-{{i}}" type="text">
+              <label for="title-{{i}}">Назва</label>
+            </div>
+            <div class="input-field">
+              <textarea formControlName="news" id="content-{{i}}" class="materialize-textarea"></textarea>
+              <label for="content-{{i}}">Контент</label>
+            </div>
+            <button type="button" class="btn red" (click)="removeArticle(i)">Видалити статю</button>
+          </div>
+        </div>
+        <button type="button" style="margin-top: 10px;" class="btn green"(click)="addArticle()">Додати статю</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="onCancel()" class="modal-action waves-effect waves-black btn-flat" [disabled]="form.disabled">Скасувати</button>
+        <button class="modal-action btn waves-effect" type="submit" [disabled]="form.invalid || form.disabled">Зберегти</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+

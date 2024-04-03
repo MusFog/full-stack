@@ -1,0 +1,3 @@
+
+€typescript:S1874)"±'(next?: ((value: News) => void) | null | undefined, error?: ((error: any) => void) | null | undefined, complete?: (() => void) | null | undefined): Subscription' is deprecated.(ˆÙçˆùÿÿÿÿ8—Ýì–ê1J$5e3171e8-0ece-4892-bd87-c6418647aedb
+©typescript:S6582D"[Prefer using an optional chain expression instead, as it's more concise and easier to read.(åû´Àþÿÿÿÿ8˜Ýì–ê1J$acd6db28-d625-42b7-86c3-64071bc285e4

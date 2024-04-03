@@ -1,0 +1,53 @@
+<section class="section">
+    <div class="page-title">
+    <h4>Виберіть категорії</h4>
+      <button (click)="toggleFilterVisibility()" class="btn btn-small"
+              [ngClass]="isFilteredVisible()"
+              data-tooltip="Відкрити"
+              data-position="left" #tooltip>
+      <i class="material-icons">filter_list</i>
+
+    </button>
+  </div>
+  <app-category-list *ngIf="isFilterVisible" (categoriesSelected)="onCategoriesSelected($event)">
+
+  </app-category-list>
+
+
+</section>
+<div class="section" id="section2">
+  <div class="section-heading">
+    <h2>Новини</h2>
+  </div>
+  <input type="text" (input)="onFilterChange($event)"  placeholder="Ім'я новини">
+  <div
+    class="row"
+    *ngIf="news$ | async as newsItem; else loader"
+  >
+    <div class="col s12">
+      <div class="collection" *ngIf="newsItem.length !== 0; else empty">
+        <a
+          *ngFor="let news of newsItem"
+          [routerLink]="['/newsItem', news._id]"
+          class="collection-item"
+        >
+          <ul>
+            <li>{{news.name}}</li>
+            <li>{{news.description}}</li>
+          </ul>
+        </a>
+      </div>
+      <ng-template #empty>
+        <div class="center">
+          Новини не знайдено
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+
+</div>
